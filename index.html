@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Career Navigator - Guide Your Journey From Start to Dream Job</title>
+    <meta name="description" content="Start your career journey with AI guidance. Get personalized learning roadmaps, skill development plans, interview preparation, and career mapping from day one to your dream job." />
+    <meta name="author" content="AI Career Navigator" />
+
+    <meta property="og:title" content="AI Career Navigator - Guide Your Journey From Start to Dream Job" />
+    <meta property="og:description" content="Start your career journey with AI guidance. Get personalized learning roadmaps, skill development plans, interview preparation, and career mapping from day one to your dream job." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script>
+      // Restore the path redirected to 404.html on GitHub Pages (SPA deep links).
+      (function (l) {
+        if (l.search[1] === "/") {
+          var decoded = l.search
+            .slice(1)
+            .split("&")
+            .map(function (s) {
+              return s.replace(/~and~/g, "&");
+            })
+            .join("?");
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })(window.location);
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

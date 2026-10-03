@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Career Navigator | Project and Interview Guide</title>
+<style>
+  @page { size: A4; margin: 17mm 16mm 19mm; @bottom-left { content: "AI Career Navigator | Project Interview Guide"; color: #62717e; font: 8pt Arial, sans-serif; } @bottom-right { content: "Page " counter(page) " of " counter(pages); color: #62717e; font: 8pt Arial, sans-serif; } }
+  :root { color-scheme: light; --ink:#182b37; --muted:#526875; --teal:#137c78; --blue:#245b75; --line:#d7e2e5; --pale:#edf5f4; --wash:#f5f8fa; --gold:#b37b24; }
+  * { box-sizing:border-box; }
+  body { margin:0; color:var(--ink); background:#fff; font:10pt/1.48 "Segoe UI",Arial,sans-serif; }
+  h1,h2,h3,h4 { color:var(--ink); line-height:1.18; margin:0; }
+  h1 { font-size:31pt; letter-spacing:0; }
+  h2 { font-size:20pt; border-bottom:2px solid var(--teal); padding-bottom:6px; margin:0 0 12px; break-after:avoid; }
+  h3 { font-size:13pt; margin:15px 0 6px; color:var(--blue); break-after:avoid; }
+  h4 { font-size:10.5pt; margin:10px 0 4px; }
+  p { margin:5px 0 8px; }
+  ul,ol { margin:5px 0 9px; padding-left:20px; }
+  li { margin:3px 0; }
+  a { color:#126b78; text-decoration:none; }
+  code { font-family:Consolas,"Courier New",monospace; color:#124d55; background:#eff5f5; padding:1px 3px; border-radius:2px; font-size:9pt; overflow-wrap:anywhere; }
+  pre { white-space:pre-wrap; overflow-wrap:anywhere; font:8.2pt/1.35 Consolas,"Courier New",monospace; background:#f1f5f6; border-left:3px solid var(--teal); padding:10px 12px; margin:8px 0 12px; break-inside:avoid; }
+  table { width:100%; border-collapse:collapse; margin:8px 0 13px; font-size:8.7pt; }
+  th { color:#fff; background:#245b66; text-align:left; font-weight:650; }
+  th,td { border:1px solid var(--line); padding:6px 7px; vertical-align:top; }
+  tr { break-inside:avoid; }
+  section { margin:0 0 18px; }
+  .cover { min-height:245mm; display:flex; flex-direction:column; justify-content:space-between; padding:17mm 4mm 8mm; break-after:page; }
+  .cover-mark { font-size:10pt; text-transform:uppercase; color:var(--teal); font-weight:700; letter-spacing:1.2px; }
+  .cover-title { margin-top:35mm; }
+  .cover-title p { max-width:130mm; color:var(--muted); font-size:14pt; line-height:1.45; margin-top:15px; }
+  .cover-line { height:5px; width:55mm; background:var(--teal); margin:20px 0; }
+  .cover-meta { color:var(--muted); border-top:1px solid var(--line); padding-top:10px; }
+  .callout { border-left:4px solid var(--teal); background:var(--pale); padding:9px 12px; margin:9px 0 12px; break-inside:avoid; }
+  .warn { border-left-color:var(--gold); background:#fbf6eb; }
+  .small { color:var(--muted); font-size:8.5pt; }
+  .label { display:inline-block; border:1px solid #b9d3d1; background:#eff7f6; color:#245b66; border-radius:3px; padding:2px 6px; margin:2px; font-size:8pt; }
+  .flow { display:flex; flex-wrap:wrap; align-items:stretch; gap:6px; margin:10px 0 15px; }
+  .flow div { flex:1 1 28mm; min-width:28mm; border:1px solid #b9d3d1; background:#f3f8f8; padding:9px; text-align:center; border-radius:4px; font-size:8.5pt; }
+  .flow b { color:var(--teal); display:block; margin-bottom:3px; }
+  .toc li { margin:5px 0; }
+  .two-col { columns:2; column-gap:14mm; }
+  .two-col li { break-inside:avoid; }
+  .page-break { break-before:page; }
+  .keep { break-inside:avoid; }
+  .muted { color:var(--muted); }
+  .number { color:var(--teal); font-weight:700; }
+  .question { border-top:1px solid var(--line); padding-top:6px; margin-top:9px; break-inside:avoid; }
+  .question strong { color:var(--blue); }
+  .signature { font-size:9pt; color:var(--muted); }
+  @media screen { body { max-width:900px; margin:24px auto; padding:20px; box-shadow:0 5px 30px #16323b18; } .cover { min-height:950px; } }
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="cover-mark">Engineering field guide · interview preparation</div>
+  <div class="cover-title">
+    <h1>AI Career<br>Navigator</h1>
+    <div class="cover-line"></div>
+    <p>Project structure, frontend and backend walkthrough, MongoDB data model, Groq AI flow, and interview-ready explanations.</p>
+    <p class="small">A practical guide to understanding the whole application: what each folder owns, how a candidate request travels through the system, and where to make changes safely.</p>
+  </div>
+  <div class="cover-meta">
+    <strong>Project:</strong> skill-quest-career-navigator<br>
+    <strong>Stack:</strong> React 18 · TypeScript · Vite · Express 5 · MongoDB/Mongoose · Groq<br>
+    <strong>Prepared from:</strong> the current workspace source and configuration
+  </div>
+</div>
+
+<section>
+  <h2>How to Use This Guide</h2>
+  <p>Read the overview and request-flow sections first. Then use the file catalog as a map while opening source files in the editor. The interview questions at the end are designed to help explain trade-offs in your own words, not to memorize lines verbatim.</p>
+  <div class="callout"><strong>Scope note.</strong> This document covers every first-party source directory and project configuration file. It explains each feature module and inventories the UI primitives individually. <code>node_modules/</code> is installed third-party code and <code>dist/</code> is generated build output; neither is hand-maintained application source. Private <code>.env</code> values are intentionally not reproduced here.</div>
+  <h3>Contents</h3>
+  <ol class="toc">
+    <li>Project in one minute</li><li>System architecture and request flow</li><li>Application routes and candidate journeys</li>
+    <li>Backend API, authentication, and MongoDB document</li><li>Groq integration and prompt processing</li>
+    <li>Feature-by-feature frontend guide</li><li>Complete folder and file catalog</li><li>UI primitives inventory</li>
+    <li>Configuration, running, and validation</li><li>Security boundaries and known limitations</li><li>Interview practice questions</li>
+  </ol>
+</section>
+
+<section class="page-break">
+  <h2>1. Project in One Minute</h2>
+  <p><strong>AI Career Navigator</strong> is a single-page career coaching application. A candidate creates an account, uploads or pastes resume text, asks Groq to analyze or generate career material, and keeps the resulting profile data in MongoDB. The React frontend owns the user experience; an Express API owns authentication, authorization, database access, and all calls containing the Groq secret.</p>
+  <div class="callout"><strong>Interview summary:</strong> “This is a React and TypeScript career coaching app backed by an Express API. Mongoose stores one candidate document per account, passwords are bcrypt-hashed, and a seven-day JWT ties every profile and AI request to the current candidate. Vite proxies the browser’s <code>/api</code> calls to Express. Groq runs server-side and returns structured JSON for resume review, roadmaps, mindmaps, and interview practice.”</div>
+  <h3>Technology map</h3>
+  <table><thead><tr><th>Layer</th><th>Technology</th><th>Role in this project</th></tr></thead><tbody>
+    <tr><td>UI</td><td>React 18, TypeScript, React Router</td><td>Pages, reusable components, form state, and client-side navigation.</td></tr>
+    <tr><td>Design system</td><td>Tailwind CSS, Radix UI wrappers, Lucide</td><td>Utility styling, accessible controls, icons, and theme tokens.</td></tr>
+    <tr><td>Development/build</td><td>Vite, SWC, npm</td><td>Fast local frontend server and production bundle.</td></tr>
+    <tr><td>API</td><td>Node.js 20+, Express 5</td><td>REST endpoints, validation, JWT auth, AI proxy.</td></tr>
+    <tr><td>Persistence</td><td>MongoDB, Mongoose</td><td>Candidate accounts and account-owned career profile state.</td></tr>
+    <tr><td>Authentication</td><td>bcryptjs, jsonwebtoken</td><td>Password hashing and signed bearer tokens.</td></tr>
+    <tr><td>AI</td><td>Groq OpenAI-compatible HTTP API</td><td>Model selection, JSON response generation, structured career assistance.</td></tr>
+    <tr><td>Resume parsing</td><td>pdfjs-dist, mammoth</td><td>Extract selectable text from PDF and DOCX in the browser.</td></tr>
+    <tr><td>Mindmap</td><td>React Flow</td><td>Interactive node-and-edge visualization.</td></tr>
+  </tbody></table>
+</section>
+
+<section>
+  <h2>2. Architecture and Request Flow</h2>
+  <div class="flow">
+    <div><b>1 · Browser</b>React pages, controls, context state</div><div><b>2 · Vite proxy</b><code>/api/*</code> to port 3001</div><div><b>3 · Express</b>Validate request, verify JWT</div><div><b>4 · MongoDB</b><code>skillquest.candidates</code></div><div><b>5 · Groq (AI only)</b>Server-side model request</div>
+  </div>
+  <p>During development, the browser loads from <code>http://localhost:8080</code>. Its relative API requests go to <code>/api</code>; the Vite proxy forwards them to <code>http://127.0.0.1:3001</code>. This makes browser and API calls same-origin from the frontend’s point of view and avoids exposing a second public origin. Express connects to the MongoDB URI from the server environment. AI routes call Groq directly from Node, so the Groq key never enters a JavaScript bundle.</p>
+  <h3>Typical authenticated request</h3>
+  <ol>
+    <li>The user submits a form in a page component.</li><li><code>apiRequest()</code> adds JSON headers and the bearer token from browser local storage.</li>
+    <li>Vite forwards the request to Express. The route checks the Mongo connection and verifies the JWT.</li>
+    <li>For profile writes, the server confirms every top-level field is allowed, merges those fields into that candidate’s profile, and saves the Mongoose document.</li>
+    <li>The JSON response returns to the page; <code>AuthContext</code> updates its in-memory copy so the UI reflects the saved value.</li>
+  </ol>
+  <div class="callout warn"><strong>Keep the responsibilities clear:</strong> React state is the immediate view state, not the durable database. MongoDB is the durable account data store. The JWT identifies who may access it. Groq generates suggestions but does not store a candidate profile.</div>
+</section>
+
+<section class="page-break">
+  <h2>3. Routes and Candidate Journeys</h2>
+  <table><thead><tr><th>URL</th><th>Page/component</th><th>Access and purpose</th></tr></thead><tbody>
+    <tr><td><code>/</code></td><td><code>Home</code></td><td>Public landing page and personalized roadmap form. Generation requires an account.</td></tr>
+    <tr><td><code>/auth</code></td><td><code>Auth</code></td><td>Registration and sign-in form. Returns to the route that required authentication when possible.</td></tr>
+    <tr><td><code>/dashboard</code></td><td><code>Dashboard</code> + <code>DashboardHome</code></td><td>Protected account home with live profile-derived progress.</td></tr>
+    <tr><td><code>/dashboard/career-mapping</code></td><td><code>CareerMapping</code></td><td>Upload/paste resume, ask Groq for ATS-style review, save text and analysis.</td></tr>
+    <tr><td><code>/dashboard/skill-roadmap</code></td><td><code>SkillRoadmap</code></td><td>Interactive mindmap tab plus skill self-assessment and completion progress.</td></tr>
+    <tr><td><code>/dashboard/ai-interview</code></td><td><code>AIInterview</code></td><td>Choose HR or technical interview, generate questions, submit/evaluate answers, persist sessions.</td></tr>
+    <tr><td><code>/dashboard/job-matching</code></td><td><code>JobMatching</code></td><td>Filter curated company career links and external job portals; saves search preferences.</td></tr>
+    <tr><td><code>/dashboard/mentor-connect</code></td><td><code>MentorConnect</code></td><td>Mentor directory examples, community links, open-source issue links, persisted session requests.</td></tr>
+    <tr><td>Other paths</td><td><code>NotFound</code></td><td>Fallback 404 screen.</td></tr>
+  </tbody></table>
+  <h3>Authentication lifecycle</h3>
+  <ol><li><strong>Register:</strong> POST <code>/api/auth/register</code> sends display name, email, password. The server validates, normalizes email, hashes the password with bcrypt cost 12, inserts a Candidate, and returns a JWT and profile.</li>
+    <li><strong>Restore:</strong> on app load, <code>AuthProvider</code> reads <code>skillquest.session</code> and calls <code>/api/auth/me</code>. The server verifies the token and returns the matching user and profile.</li>
+    <li><strong>Use the app:</strong> <code>ProtectedDashboard</code> renders the dashboard only when the context has a user; otherwise it redirects to <code>/auth</code>.</li>
+    <li><strong>Save:</strong> <code>saveProfile()</code> sends a PATCH with a partial profile; the API uses the candidate id in the verified token, not a client-supplied account id.</li>
+    <li><strong>Sign out:</strong> the client removes the token and clears user/profile memory. MongoDB data remains attached to the account for the next sign-in.</li></ol>
+</section>
+
+<section>
+  <h2>4. Backend API and MongoDB Model</h2>
+  <h3>Endpoint reference</h3>
+  <table><thead><tr><th>Method + path</th><th>Auth</th><th>Behavior</th></tr></thead><tbody>
+    <tr><td><code>GET /api/health</code></td><td>No token; requires DB</td><td>Returns <code>{ status: "ok", database: "skillquest" }</code> when Mongo is connected.</td></tr>
+    <tr><td><code>POST /api/auth/register</code></td><td>Public</td><td>Validate input, hash password, create account, return token/user/profile.</td></tr>
+    <tr><td><code>POST /api/auth/login</code></td><td>Public</td><td>Find normalized email, compare bcrypt hash, issue fresh token.</td></tr>
+    <tr><td><code>GET /api/auth/me</code></td><td>Bearer JWT</td><td>Restore account and profile for the token subject.</td></tr>
+    <tr><td><code>GET /api/candidate/profile</code></td><td>Bearer JWT</td><td>Read only that candidate’s profile.</td></tr>
+    <tr><td><code>PATCH /api/candidate/profile</code></td><td>Bearer JWT</td><td>Validate allow-list and merge profile update into the same candidate.</td></tr>
+    <tr><td><code>POST /api/ai/analyze-resume</code></td><td>Bearer JWT</td><td>Analyze resume text; 30-character minimum, 15,000-character maximum.</td></tr>
+    <tr><td><code>POST /api/ai/generate-roadmap</code></td><td>Bearer JWT</td><td>Generate phases, milestones, schedule, and recommendations.</td></tr>
+    <tr><td><code>POST /api/ai/generate-mindmap</code></td><td>Bearer JWT</td><td>Generate and validate node/edge JSON.</td></tr>
+    <tr><td><code>POST /api/ai/generate-interview-questions</code></td><td>Bearer JWT</td><td>Generate role-specific HR or technical questions.</td></tr>
+    <tr><td><code>POST /api/ai/evaluate-answer</code></td><td>Bearer JWT</td><td>Score an answer and return strengths, improvements, and feedback.</td></tr>
+  </tbody></table>
+  <h3>Candidate document</h3>
+  <p>Mongoose model <code>Candidate</code> maps to MongoDB collection <code>candidates</code> in database <code>skillquest</code>. The schema has timestamps, a unique lowercased email index, and a password hash configured with <code>select: false</code>.</p>
+  <pre>{
+  _id: ObjectId,
+  displayName: String,
+  email: String,                 // unique, lowercase, trimmed
+  passwordHash: String,          // bcrypt; excluded from normal reads
+  profile: {                     // candidate-owned feature data
+    resumeText, careerAnalysis,
+    roadmapData, roadmapRequest,
+    mindmap, selectedRole, skillLevels,
+    learningProgress, interviews,
+    jobPreferences, mentorRequests
+  },
+  createdAt: Date,
+  updatedAt: Date
+}</pre>
+  <table><thead><tr><th>Profile field</th><th>What it persists</th></tr></thead><tbody>
+    <tr><td><code>resumeText</code></td><td>Extracted or pasted text; the binary upload itself is not stored.</td></tr>
+    <tr><td><code>careerAnalysis</code></td><td>Groq summary, ATS score/breakdown, skills, paths, keywords, strengths, improvements, rewrite suggestions.</td></tr>
+    <tr><td><code>roadmapData</code> / <code>roadmapRequest</code></td><td>Generated output plus domain, learning goal, and daily hours input.</td></tr>
+    <tr><td><code>mindmap</code></td><td>Domain/goal and raw node/edge graph so the visualization can be rebuilt after login.</td></tr>
+    <tr><td><code>selectedRole</code> / <code>skillLevels</code></td><td>Target role and per-skill current/target percentages.</td></tr>
+    <tr><td><code>learningProgress</code></td><td>Completion booleans keyed by roadmap item title.</td></tr>
+    <tr><td><code>interviews</code></td><td>Session id/type/role/focus/date, generated questions, candidate answers, evaluations, final score, completion state.</td></tr>
+    <tr><td><code>jobPreferences</code></td><td>Selected domain and company filter query. There is no live job-feed record.</td></tr>
+    <tr><td><code>mentorRequests</code></td><td>Mentor names for which the candidate saved a connection request.</td></tr>
+  </tbody></table>
+  <p>The profile is a MongoDB <code>Mixed</code> object. The API limits updates to an explicit top-level allow-list and shallow-merges allowed properties. That keeps account ownership enforced, but does not deeply validate every nested value; a production evolution could replace <code>Mixed</code> with typed sub-schemas and request validation.</p>
+</section>
+
+<section class="page-break">
+  <h2>5. Groq AI Integration</h2>
+  <p>AI generation is centralized in <code>server/index.js</code>. The frontend never calls Groq directly. Every <code>/api/ai/*</code> route first passes the database and JWT middleware, validates required inputs, builds a system/user prompt, calls the shared <code>groqJson()</code> helper, and returns structured JSON.</p>
+  <h3>Model and JSON handling</h3>
+  <ol><li>Read <code>GROQ_API_KEY</code> from the Node server’s environment. If absent, return a clear 503 instead of silently fabricating AI output.</li>
+    <li>Fetch the available Groq models once and cache a preferred available model; fall back to <code>llama-3.3-70b-versatile</code> if model discovery cannot choose one.</li>
+    <li>Send an OpenAI-compatible <code>/chat/completions</code> request with system/user messages, temperature, token limit, and JSON response format.</li>
+    <li>If a model rejects the JSON response-format option with HTTP 400, retry without it.</li>
+    <li>Parse plain JSON or a fenced JSON object, then validate key shapes for mindmaps/questions and apply safe defaults for resume analysis.</li></ol>
+  <table><thead><tr><th>AI job</th><th>Input essentials</th><th>Expected result</th></tr></thead><tbody>
+    <tr><td>Resume analysis</td><td>Resume text, capped at 15k characters</td><td>ATS feedback, skills, career paths, keywords, resume suggestions.</td></tr>
+    <tr><td>Roadmap</td><td>Domain, learning goal, optional hours/day</td><td>Phases, topics/resources, milestones, weekly goals, daily schedule.</td></tr>
+    <tr><td>Mindmap</td><td>Domain and learning goal</td><td>Hierarchical <code>nodes[]</code> and <code>edges[]</code> rendered by React Flow.</td></tr>
+    <tr><td>Interview questions</td><td>Role and HR/technical focus</td><td>Questions with category, difficulty, expected points, time limit.</td></tr>
+    <tr><td>Answer evaluation</td><td>Question, candidate answer, expected points</td><td>0–100 score, strengths, improvements, feedback, covered/missed points.</td></tr>
+  </tbody></table>
+  <div class="callout warn"><strong>Environment separation:</strong> <code>.env.example</code> is a safe template. <code>.env</code> contains machine-local credentials, is ignored by Git, and must never be imported into client code or included in the PDF. Rotate any key that has been shared or committed.</div>
+</section>
+
+<section>
+  <h2>6. Frontend Features: Code Walkthrough</h2>
+  <h3>Home — <code>src/pages/Home.tsx</code></h3>
+  <p>Public entry page with navigation, feature summaries, and a roadmap form. Domain, learning goal, and available daily hours go to <code>/api/ai/generate-roadmap</code>. The generated response and original request are saved in the signed-in profile. A visitor can browse the page, but generation redirects to account sign-in.</p>
+  <h3>Career Mapping — <code>src/pages/CareerMapping.tsx</code></h3>
+  <p>Accepts TXT, PDF, and DOCX files or pasted text. PDF extraction uses PDF.js in the browser; DOCX extraction uses Mammoth. Extracted text is trimmed and limited to 15,000 characters, then saved. The analysis request is authenticated and its JSON result is saved for reload. The result view displays ATS score/breakdown, keywords, rewrite suggestions, experience level, skills, strengths, improvements, and suggested career tracks. The original DOC format is explicitly unsupported.</p>
+  <h3>Skill Roadmap — <code>src/pages/SkillRoadmap.tsx</code></h3>
+  <p>Two tabs: Interactive Mindmap and Skill Assessment. Eight predefined technical roles provide baseline skill targets. Candidate current proficiency is editable by sliders; releasing a slider persists the changed role-specific array. Learning item completion is stored in <code>learningProgress</code>. Links/resources are a bundled catalog, not AI-generated database records.</p>
+  <h3>Mindmap — <code>src/components/MindmapGenerator.tsx</code></h3>
+  <p>Prompts for domain and goal; POSTs to Groq through the API; maps saved graph data into React Flow <code>Node</code> and <code>Edge</code> objects. Node color/spacing is based on hierarchy level. Raw graph plus inputs are saved, then reconstructed when the component mounts. The current Download icon displays an informational toast; actual image/PDF export is not implemented.</p>
+  <h3>AI Interview — <code>src/pages/AIInterview.tsx</code></h3>
+  <p>Flow is select type → setup role/focus → generate questions → answer/evaluate → completion. A UUID identifies a session. Each evaluated answer and the updated question/answer arrays are persisted. Incomplete sessions can be restored from profile state; completed sessions appear in history with average score. HR/technical prompt focus controls the type of Groq questions.</p>
+  <h3>Job Matching — <code>src/pages/JobMatching.tsx</code></h3>
+  <p>Stores selected domain and company filter in the profile. It filters a curated in-code list of company career pages and links to external job boards. It does not query a job API, scrape live listings, submit applications, or calculate a candidate/job match score. The screen says so rather than presenting mock matches as real.</p>
+  <h3>Mentor Connect — <code>src/pages/MentorConnect.tsx</code></h3>
+  <p>Shows a sample mentor catalog, external developer communities, and links to GitHub “good first issue” searches. Clicking a mentor request stores the mentor name on the candidate profile and disables that request button. Community membership and mentor availability are not verified by this app.</p>
+  <h3>Dashboard — <code>src/pages/Dashboard.tsx</code> and <code>DashboardHome.tsx</code></h3>
+  <p>Shared shell combines sidebar, nested route outlet, candidate display name, and sign-out. Dashboard home quick actions link to the feature pages. Progress is calculated from profile completion, saved skill values, and completed interview scores, not fixed percentages.</p>
+</section>
+
+<section class="page-break">
+  <h2>7. Complete Project Tree</h2>
+  <pre>skill-quest-career-navigator/
+├── .env                         private local settings (ignored by Git)
+├── .env.example                 safe environment-variable template
+├── .gitignore                   ignores secrets, dependencies, build output
+├── README.md                    setup and local run instructions
+├── package.json                 scripts and runtime/dev dependencies
+├── package-lock.json            npm dependency lock
+├── components.json              shadcn/ui generator aliases/settings
+├── eslint.config.js             ESLint flat configuration
+├── index.html                   Vite HTML entry and page metadata
+├── postcss.config.js            Tailwind and Autoprefixer plugins
+├── tailwind.config.ts           theme tokens, colors, animations
+├── tsconfig.json                shared TypeScript project references/aliases
+├── tsconfig.app.json            browser TypeScript options
+├── tsconfig.node.json           Vite config TypeScript options
+├── vite.config.ts               Vite React plugin, alias, API proxy
+├── public/
+│   ├── placeholder.svg          generic placeholder asset
+│   └── robots.txt               crawler access rules
+├── server/
+│   └── index.js                 Express API, Mongo model, auth, Groq routes
+└── src/
+    ├── main.tsx                 React root and CSS entry
+    ├── App.tsx                  providers, router, protected dashboard
+    ├── App.css                  legacy starter styles; not imported by main
+    ├── index.css                global Tailwind layers and theme variables
+    ├── vite-env.d.ts            Vite client type declarations
+    ├── contexts/
+    │   └── AuthContext.tsx       signed-in candidate and profile state
+    ├── hooks/
+    │   ├── use-mobile.tsx       responsive breakpoint hook
+    │   └── use-toast.ts         toast hook re-export
+    ├── lib/
+    │   ├── api.ts               API client and candidate data types
+    │   └── utils.ts             class-name merge helper
+    ├── components/
+    │   ├── Navbar.tsx           public navigation and account actions
+    │   ├── DashboardSidebar.tsx feature navigation
+    │   ├── MindmapGenerator.tsx AI mindmap UI/React Flow graph
+    │   └── ui/                  reusable Radix/shadcn-style primitives
+    └── pages/
+        ├── Home.tsx             public landing and roadmap generator
+        ├── Auth.tsx             sign-in and registration
+        ├── Dashboard.tsx        authenticated dashboard shell
+        ├── DashboardHome.tsx    metrics and quick actions
+        ├── CareerMapping.tsx    resume import and AI analysis
+        ├── SkillRoadmap.tsx     skill scoring and learning progress
+        ├── AIInterview.tsx      question/answer practice
+        ├── JobMatching.tsx      company and job-board links
+        ├── MentorConnect.tsx    mentor/community/project directory
+        └── NotFound.tsx         unknown-route fallback</pre>
+  <div class="callout"><strong>Removed integrations:</strong> there is no Supabase or builder-specific runtime directory in the current source tree. The project’s backend is the local Express service.</div>
+</section>
+
+<section>
+  <h2>8. Folder and File Responsibilities</h2>
+  <table><thead><tr><th>Path</th><th>Contents and why it exists</th></tr></thead><tbody>
+    <tr><td><code>src/pages/</code></td><td>Route-level user experiences. Pages compose shared controls, call typed API functions, and access candidate data through the auth context.</td></tr>
+    <tr><td><code>src/components/</code></td><td>Reusable app components shared across pages: navigation and mindmap UI.</td></tr>
+    <tr><td><code>src/components/ui/</code></td><td>Small accessible UI primitives based largely on Radix UI. They provide consistent buttons, menus, dialog, form controls, layout, feedback, and visualization wrappers.</td></tr>
+    <tr><td><code>src/contexts/</code></td><td>Cross-route state. AuthProvider restores the signed-in user and Mongo-backed profile and exposes login/register/logout/save methods.</td></tr>
+    <tr><td><code>src/hooks/</code></td><td>Reusable React hooks for responsive viewport behavior and toast notifications.</td></tr>
+    <tr><td><code>src/lib/</code></td><td>Shared non-visual logic: API transport, domain interfaces, token storage, and Tailwind class merging.</td></tr>
+    <tr><td><code>server/</code></td><td>Node-only trust boundary. Credentials stay here; this layer owns MongoDB and talks to Groq.</td></tr>
+    <tr><td><code>public/</code></td><td>Static assets copied to the built site unchanged; robots policy and placeholder graphic.</td></tr>
+    <tr><td><code>dist/</code></td><td>Generated production site from <code>npm run build</code>. Recreate; do not hand-edit.</td></tr>
+    <tr><td><code>node_modules/</code></td><td>Installed dependencies from npm. Recreate using the package manifest/lockfile.</td></tr>
+    <tr><td><code>docs/</code></td><td>This project/interview guide and its generated PDF.</td></tr>
+  </tbody></table>
+  <h3>Top-level configuration files</h3>
+  <table><thead><tr><th>File</th><th>What to know</th></tr></thead><tbody>
+    <tr><td><code>package.json</code></td><td>Scripts: <code>dev</code> runs API and Vite together; <code>dev:api</code> watches the Node server; <code>dev:web</code> runs Vite; <code>start</code> starts API; <code>build</code> builds UI; <code>lint</code> runs ESLint.</td></tr>
+    <tr><td><code>package-lock.json</code></td><td>Exact npm dependency tree for repeatable installation. Commit the lock with dependency changes.</td></tr>
+    <tr><td><code>.env.example</code></td><td>Documents Mongo URI, API port, JWT secret, Groq key variable names without real credentials.</td></tr>
+    <tr><td><code>.gitignore</code></td><td>Ignores <code>.env</code>/<code>.env.*</code> (except example), <code>node_modules</code>, <code>dist</code>, logs, and editor files.</td></tr>
+    <tr><td><code>vite.config.ts</code></td><td>Runs the React SWC plugin, aliases <code>@</code> to <code>src</code>, proxies <code>/api</code> to port 3001.</td></tr>
+    <tr><td><code>index.html</code></td><td>Browser document shell. Loads <code>src/main.tsx</code> into <code>#root</code>.</td></tr>
+    <tr><td><code>tailwind.config.ts</code></td><td>Class scanning, dark mode, app colors/radii/gradients/shadows/animations, animate plugin.</td></tr>
+    <tr><td><code>src/index.css</code></td><td>HSL CSS variables and Tailwind base rules. Change design tokens here.</td></tr>
+    <tr><td><code>tsconfig*.json</code></td><td>Separate app and Vite config compiler scopes; <code>@/*</code> resolves to <code>src/*</code>.</td></tr>
+    <tr><td><code>eslint.config.js</code></td><td>TypeScript/React Hooks lint rules; generated UI has a few known lint findings.</td></tr>
+    <tr><td><code>postcss.config.js</code></td><td>Runs Tailwind and Autoprefixer during CSS processing.</td></tr>
+    <tr><td><code>components.json</code></td><td>shadcn-style component generator config and path aliases.</td></tr>
+    <tr><td><code>README.md</code></td><td>Short first-run instructions; this guide is the deeper learning resource.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="page-break">
+  <h2>9. UI Primitive Inventory</h2>
+  <p>These modules are reusable building blocks, not individual product features. Most wrap Radix UI behavior and apply the application’s Tailwind classes. Read the page using a primitive before modifying the primitive itself.</p>
+  <table><thead><tr><th>File</th><th>Responsibility</th><th>File</th><th>Responsibility</th></tr></thead><tbody>
+    <tr><td><code>accordion.tsx</code></td><td>Expandable stacked sections.</td><td><code>alert-dialog.tsx</code></td><td>Modal confirmation requiring an explicit action.</td></tr>
+    <tr><td><code>alert.tsx</code></td><td>Inline message/status panel.</td><td><code>aspect-ratio.tsx</code></td><td>Maintains a chosen media/content aspect ratio.</td></tr>
+    <tr><td><code>avatar.tsx</code></td><td>Image/avatar with fallback initials.</td><td><code>badge.tsx</code></td><td>Compact status/category label.</td></tr>
+    <tr><td><code>breadcrumb.tsx</code></td><td>Hierarchical navigation path.</td><td><code>button.tsx</code></td><td>Shared button variants and sizes.</td></tr>
+    <tr><td><code>calendar.tsx</code></td><td>Date picker calendar surface.</td><td><code>card.tsx</code></td><td>Card, header, title, content, footer composition.</td></tr>
+    <tr><td><code>carousel.tsx</code></td><td>Previous/next content carousel.</td><td><code>chart.tsx</code></td><td>Chart styling/container helpers for Recharts.</td></tr>
+    <tr><td><code>checkbox.tsx</code></td><td>Accessible binary selection.</td><td><code>collapsible.tsx</code></td><td>Show/hide a related content block.</td></tr>
+    <tr><td><code>command.tsx</code></td><td>Command palette/searchable action list.</td><td><code>context-menu.tsx</code></td><td>Right-click action menu.</td></tr>
+    <tr><td><code>dialog.tsx</code></td><td>Accessible modal dialog.</td><td><code>drawer.tsx</code></td><td>Mobile-oriented slide-in panel.</td></tr>
+    <tr><td><code>dropdown-menu.tsx</code></td><td>Button-triggered action/options menu.</td><td><code>form.tsx</code></td><td>React Hook Form integration, labels/errors.</td></tr>
+    <tr><td><code>hover-card.tsx</code></td><td>Content panel shown on hover/focus.</td><td><code>input-otp.tsx</code></td><td>One-time passcode input slots.</td></tr>
+    <tr><td><code>input.tsx</code></td><td>Styled text/number/email input.</td><td><code>label.tsx</code></td><td>Accessible control label.</td></tr>
+    <tr><td><code>menubar.tsx</code></td><td>Application-style horizontal menus.</td><td><code>navigation-menu.tsx</code></td><td>Accessible site navigation primitives.</td></tr>
+    <tr><td><code>pagination.tsx</code></td><td>Page navigation controls.</td><td><code>popover.tsx</code></td><td>Anchored floating content.</td></tr>
+    <tr><td><code>progress.tsx</code></td><td>Progress bar display.</td><td><code>radio-group.tsx</code></td><td>Mutually exclusive selection.</td></tr>
+    <tr><td><code>resizable.tsx</code></td><td>Resizable pane layout primitives.</td><td><code>scroll-area.tsx</code></td><td>Styled cross-platform scroll container.</td></tr>
+    <tr><td><code>select.tsx</code></td><td>Accessible option selector.</td><td><code>separator.tsx</code></td><td>Visual divider.</td></tr>
+    <tr><td><code>sheet.tsx</code></td><td>Side-panel dialog shell.</td><td><code>sidebar.tsx</code></td><td>Responsive collapsible app sidebar.</td></tr>
+    <tr><td><code>skeleton.tsx</code></td><td>Loading placeholder shape.</td><td><code>slider.tsx</code></td><td>Numeric range control for self-assessed skill.</td></tr>
+    <tr><td><code>sonner.tsx</code></td><td>Sonner toast provider wrapper.</td><td><code>switch.tsx</code></td><td>Accessible on/off toggle.</td></tr>
+    <tr><td><code>table.tsx</code></td><td>Consistent table markup/styling.</td><td><code>tabs.tsx</code></td><td>Tabbed content navigation.</td></tr>
+    <tr><td><code>textarea.tsx</code></td><td>Styled multi-line text input.</td><td><code>toast.tsx</code></td><td>Toast viewport and message primitives.</td></tr>
+    <tr><td><code>toaster.tsx</code></td><td>Renders queued toast messages.</td><td><code>toggle-group.tsx</code></td><td>Grouped toggle controls.</td></tr>
+    <tr><td><code>toggle.tsx</code></td><td>Single pressed/unpressed control.</td><td><code>tooltip.tsx</code></td><td>Short hover/focus help text and provider.</td></tr>
+    <tr><td><code>use-toast.ts</code></td><td>Toast queue/reducer and notification hook.</td><td><code>—</code></td><td>Toast consumers use the hook through <code>src/hooks/use-toast.ts</code>.</td></tr>
+  </tbody></table>
+</section>
+
+<section>
+  <h2>10. Configuration and Local Run</h2>
+  <h3>Prerequisites</h3><ul><li>Node.js 20 or later and npm.</li><li>MongoDB service listening at <code>mongodb://localhost:27017/</code>.</li><li>A valid Groq API key in server-only <code>.env</code> for AI routes.</li></ul>
+  <h3>First run</h3>
+  <pre>npm install
+# Create .env from .env.example, then set a private GROQ_API_KEY
+npm run dev</pre>
+  <p>Vite is available at <code>http://localhost:8080</code>. Express is at <code>http://localhost:3001</code>. The default database is <code>skillquest</code>; Mongo creates it and the collection on first write. Check <code>GET http://localhost:3001/api/health</code>.</p>
+  <h3>Scripts in <code>package.json</code></h3>
+  <table><thead><tr><th>Command</th><th>Meaning</th></tr></thead><tbody>
+    <tr><td><code>npm run dev</code></td><td>Concurrently starts API and Vite; stops the pair together.</td></tr>
+    <tr><td><code>npm run dev:api</code></td><td>Starts Node with watch mode for backend changes.</td></tr>
+    <tr><td><code>npm run dev:web</code></td><td>Starts only the frontend server.</td></tr>
+    <tr><td><code>npm start</code></td><td>Starts the API process; it expects a production frontend to be hosted separately.</td></tr>
+    <tr><td><code>npm run build</code></td><td>Generates the static frontend under <code>dist/</code>.</td></tr>
+    <tr><td><code>npm run lint</code></td><td>Runs ESLint across the project.</td></tr>
+  </tbody></table>
+  <div class="callout"><strong>Verified project state:</strong> the workspace build passed; changed application files passed targeted lint; the full lint command has pre-existing errors in <code>src/components/ui/command.tsx</code>, <code>src/components/ui/textarea.tsx</code>, and <code>tailwind.config.ts</code>. A live Mongo profile round-trip/account isolation check passed, and a real authenticated Groq roadmap request returned structured phases and schedule.</div>
+</section>
+
+<section class="page-break">
+  <h2>11. Security and Design Boundaries</h2>
+  <table><thead><tr><th>Boundary</th><th>Current implementation</th><th>Interview explanation / next improvement</th></tr></thead><tbody>
+    <tr><td>Password</td><td>bcrypt hash with cost 12; password hash excluded by default in Mongoose.</td><td>Never store or return plaintext passwords. Add reset and verification flows for production.</td></tr>
+    <tr><td>Session</td><td>JWT signed with server secret, subject is Mongo user id, expires in 7 days; browser stores it in localStorage.</td><td>localStorage is simple but exposed to successful XSS. Production could use secure HttpOnly SameSite cookies, refresh/revocation strategy, and CSP.</td></tr>
+    <tr><td>Authorization</td><td>Every profile/AI route verifies bearer token and queries by its <code>sub</code>.</td><td>Do not accept a candidate id from the request body as authority. Add tests for cross-account access.</td></tr>
+    <tr><td>Secrets</td><td>Groq key and JWT secret are server environment variables; <code>.env</code> ignored.</td><td>Rotate keys if exposed; use a secrets manager outside local dev.</td></tr>
+    <tr><td>Validation</td><td>Register and select API fields have manual validation; request JSON limited to 1MB.</td><td>Use a schema validator such as Zod on the server, nested profile schemas, rate limiting, and consistent errors.</td></tr>
+    <tr><td>Resume</td><td>File text is extracted in the browser, clipped to 15k characters, text saved in Mongo and sent to Groq.</td><td>Resume content is personally identifiable data. Add explicit retention/deletion controls, encryption/storage policy, and consent.</td></tr>
+    <tr><td>Job/mentor content</td><td>Company links, community URLs, and mentor examples are static UI data.</td><td>They are not live verification, job ranking, application tracking, or real mentor availability.</td></tr>
+    <tr><td>Mongo profile</td><td>Mixed schema with allow-listed top-level fields.</td><td>Typed subdocuments and field-level limits avoid malformed/oversized nested data.</td></tr>
+  </tbody></table>
+  <h3>Important vocabulary</h3>
+  <p><span class="label">JWT</span> signed claims used as a bearer session token. <span class="label">Mongoose</span> Node object/document mapper for MongoDB. <span class="label">Middleware</span> Express function that runs before the route handler. <span class="label">Allow-list</span> fields the API explicitly permits a profile update to change. <span class="label">Proxy</span> Vite forwards a browser path to a separate backend during local development. <span class="label">JSON mode</span> model request option encouraging parseable structured output.</p>
+</section>
+
+<section>
+  <h2>12. Interview Practice</h2>
+  <p>Answer with a clear sequence: problem → design decision → data/request flow → trade-off. Tie each explanation to a real file or endpoint.</p>
+  <div class="question"><strong>Q1. Walk me through the architecture.</strong><p>React/TypeScript pages are served by Vite. The browser calls relative <code>/api</code> endpoints; Vite proxies them to Express. Express validates and authenticates requests, reads/writes Mongo through Mongoose, and calls Groq for AI routes. Groq and Mongo credentials stay on the server.</p></div>
+  <div class="question"><strong>Q2. How does a candidate’s profile remain private and load after login?</strong><p>Login returns a JWT whose subject is the Mongo candidate id. The client stores the token and sends it as a bearer header. Middleware verifies it; profile routes query only <code>req.candidateId</code>. On reload, the auth provider calls <code>/api/auth/me</code> and hydrates the saved profile. Sign-out deletes client session state but not the database record.</p></div>
+  <div class="question"><strong>Q3. How are passwords handled?</strong><p>The server hashes at registration with bcrypt cost 12. The password hash is excluded in ordinary Mongoose selects. At login, bcrypt compares the supplied password with the stored hash. A JWT is returned only after successful comparison.</p></div>
+  <div class="question"><strong>Q4. Why not call Groq from the React app?</strong><p>A browser bundle is public, so any embedded API key can be copied and abused. The frontend calls an authenticated local API; only the Express process attaches the Groq authorization header.</p></div>
+  <div class="question"><strong>Q5. What happens if MongoDB is down?</strong><p>Startup attempts to connect with a short selection timeout and exits if it cannot connect. Routes also check Mongoose connection state and return 503 when the database is unavailable. The health endpoint is the quick operational check.</p></div>
+  <div class="question"><strong>Q6. What does the API do with model output?</strong><p>It asks for JSON, retries without the response-format option for models that reject it, parses fenced or plain JSON, and checks required arrays for mindmaps and interview questions. Resume analysis gets safe defaults for missing fields.</p></div>
+  <div class="question"><strong>Q7. What gets stored for a resume upload?</strong><p>The browser extracts selectable text from TXT/PDF/DOCX, truncates it at 15k characters, then persists that text and the generated analysis in the candidate profile. The uploaded binary is not sent to Mongo.</p></div>
+  <div class="question"><strong>Q8. Does “Job Matching” currently match actual jobs?</strong><p>No live job source is connected. It stores the user’s domain/filter and displays curated employer career pages and job boards. It does not claim fabricated fit scores or application counts.</p></div>
+  <div class="question"><strong>Q9. How are interview attempts saved?</strong><p>A session receives a UUID and stores role/type/focus/date, questions, answers, evaluation feedback, completion state, and final average. The session is updated after each evaluated answer so progress survives a logout or reload.</p></div>
+  <div class="question"><strong>Q10. What are the most important production improvements?</strong><p>Use secure HttpOnly cookies or stronger token lifecycle controls, add rate limits and schema validation, add automated API/auth/data-isolation tests, model profile fields with typed subdocuments, build resume deletion/retention controls, and connect a real job feed before advertising matching results.</p></div>
+  <div class="question"><strong>Q11. How would you add a new candidate profile field?</strong><p>Define its TypeScript interface in <code>src/lib/api.ts</code>, add it to the server profile allow-list, persist/load it through <code>saveProfile()</code>, and write a focused test proving it saves for one account and cannot cross account boundaries.</p></div>
+  <div class="question"><strong>Q12. Why use an Express API instead of connecting React directly to MongoDB?</strong><p>Database credentials and authorization logic cannot safely live in a browser. The API is the trust boundary: it controls secrets, validates inputs, verifies identity, and scopes queries to the authenticated candidate.</p></div>
+</section>
+
+<section>
+  <h2>13. Source Reading Order</h2>
+  <ol><li><code>src/main.tsx</code> — find the React mount point.</li><li><code>src/App.tsx</code> — understand providers and route protection.</li><li><code>src/contexts/AuthContext.tsx</code> and <code>src/lib/api.ts</code> — understand account/profile state and request headers.</li><li><code>server/index.js</code> — inspect the server trust boundary, Mongo model, routes, and Groq helper.</li><li><code>src/pages/Auth.tsx</code> — follow register/login UI.</li><li><code>src/pages/CareerMapping.tsx</code> — follow file parsing, AI request, and persistence.</li><li><code>src/pages/AIInterview.tsx</code> — follow a multi-step stateful workflow.</li><li><code>src/pages/SkillRoadmap.tsx</code> and <code>src/components/MindmapGenerator.tsx</code> — follow stored skills and graph rendering.</li><li>Read Job Matching and Mentor Connect for the distinction between static catalogs and saved candidate preferences.</li><li>Finish with <code>vite.config.ts</code>, <code>package.json</code>, and CSS tokens to understand how it runs and looks.</li></ol>
+  <div class="callout"><strong>One-line mental model:</strong> pages collect intent; <code>api.ts</code> attaches session identity; Express enforces identity and validation; Mongo stores candidate-owned state; Groq supplies generated suggestions; the context updates the current screen after durable writes.</div>
+  <p class="signature">End of guide · Use this as a map back to source, then explain the reasoning in your own words.</p>
+</section>
+</body>
+</html>
